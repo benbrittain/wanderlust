@@ -7,3 +7,6 @@ authors = ["Ben Brittain <ben@brittain.org>"]
 [dependencies]
 csv = "*"
 rustc-serialize = "0.2"
+
+[dependencies.gnuplot]
+git = "https://github.com/SiegeLord/RustGnuplot.git"

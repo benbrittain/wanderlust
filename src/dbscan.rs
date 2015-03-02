@@ -4,7 +4,7 @@ use types::Point;
 type Cluster = Vec<Point>;
 //type Dataset = Vec<Point>; TODO: make an indexed dataset (O(n^2) -> O(nlog(n))
 
-pub fn dbscan(dataset: Vec<Point>, eps: f32, min_pts: usize) -> Vec<Cluster> {
+pub fn dbscan(dataset: Vec<Point>, eps: f32, min_pts: usize) -> (Vec<Cluster>, Vec<Point>)  {
     let mut clusters: Vec<Cluster> = Vec::new();
     let mut noise: Vec<Point> = Vec::new();
     let mut visited: Vec<Point> = Vec::new();
@@ -22,7 +22,7 @@ pub fn dbscan(dataset: Vec<Point>, eps: f32, min_pts: usize) -> Vec<Cluster> {
             }
         }
     }
-    clusters
+    (clusters, noise)
 }
 
 fn expand_cluster<'a>(point: &Point, neighborhood: &Vec<Point>, eps: f32, min_pts: usize,
@@ -48,5 +48,5 @@ fn region_query(point: &Point, eps: f32, dataset: &Vec<Point>) -> Vec<Point> {
 }
 
 fn distance(p1: &Point, p2: &Point) -> f32 {
-    ((p1.x - p2.x).powi(2) * (p1.y - p2.y).powi(2)).sqrt() as f32
+    ((p1.x - p2.x).powi(2) + (p1.y - p2.y).powi(2)).sqrt() as f32
 }

@@ -8,5 +8,7 @@ fn main() {
     println!("Staring Wanderlust...");
     let points = storage::load_points();
 
-    let locs = dbscan::get_locs(points, 0.01, 20);
+    let locs = dbscan::dbscan(points, 0.0000001, 20);
+    println!("{:?}", locs);
+    println!("{:?}", locs.len());
 }
